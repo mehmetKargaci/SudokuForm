@@ -1,6 +1,7 @@
-<div class="container">
+<div class="container">  
   <div class="board-form-group">
-
+    <H3 class="title">Welcome to Sudoku Puzzle</H3>
+    <h6 class="game-intro">To play game please enter a valid sudoku puzzle and press Ready!</h6>
     <div class="sudoku-board">
       @for (control of sudokuFormArray.controls; let i = $index; track i;) {
       <div>
@@ -11,14 +12,14 @@
     
     <button class="button" type="button" (click)="reset()">Reset</button>
     <button class="button" type="button" (click)="ready()">Ready</button>
-    <div *ngFor="let control of sudokuForms; let i = index;">
-      <div *ngIf="control.errors">     
-        <p class="error-box">  In cell: {{i+1}}  {{ getErrorMessage(i) }}  </p>
-      </div>
+
+    <div >
+      @for(control of sudokuFormArray.controls; let i = $index; track i){
+        <div *ngIf="control.errors">     
+          <p class="error-box">  In cell: {{i+1}}  {{ getErrorMessage(i) }}  </p>
+        </div>
+      }      
     </div>
-  </div>
-  <div >
-    
   </div>
 </div>
 

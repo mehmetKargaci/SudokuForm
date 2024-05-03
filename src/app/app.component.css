@@ -3,7 +3,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
+    color: rgba(176, 93, 206, 0.985);
+
+}
+.game-intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color: rgb(25, 32, 32);
+
 }
 
 .board-form-group{

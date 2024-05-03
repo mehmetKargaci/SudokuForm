@@ -23,7 +23,13 @@ export class AppComponent implements OnInit {
 
   ready() {
     for (const control of this.sudokuFormArray.controls) {
-      if (control.value) control.disable();
+      const value = control.value;
+      if (value !== null) { 
+        const parsedValue = parseInt(value); 
+        if (!isNaN(parsedValue) && (parsedValue >= 1 && parsedValue <= 9)) { 
+          control.disable();
+        }
+      }
     }
   }
 
@@ -33,7 +39,7 @@ export class AppComponent implements OnInit {
         control.setValue('');
         control.enable();
     }
-  }
+  }  
 
   isSixthRow(index: number): boolean {
     return Math.floor(index / 9) == 5;
@@ -52,8 +58,7 @@ export class AppComponent implements OnInit {
     // if (control.hasError('required')) {
     //   return 'Please enter a valid number (1-9)';
     // }
-    if (control.hasError('invalidNumber')) {
-      
+    if (control.hasError('invalidNumber')) {      
       return 'Value must be between 1-9';
   }
     return null;
