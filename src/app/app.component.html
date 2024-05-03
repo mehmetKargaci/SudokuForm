@@ -1,25 +1,24 @@
 <div class="container">
-  <form class="board-form-group" [formGroup]="sudokuForm">
-    <div class="sudoku-board" *ngFor="let row of cellNumbers; let i = index">
-      <input class="board-col-1" formControlName="boardControl">
-      <input class="board-col-2" formControlName="boardControl">
-      <input class="board-col-3" formControlName="boardControl">
+  <div class="board-form-group">
 
-      
-      <input class="board-col-4" formControlName="boardControl">
-      <input class="board-col-5" formControlName="boardControl">
-      <input class="board-col-6" formControlName="boardControl">
-
-      <input class="board-col-7" formControlName="boardControl">
-      <input class="board-col-8" formControlName="boardControl">
-      <input class="board-col-9" formControlName="boardControl">
-       
+    <div class="sudoku-board">
+      @for (control of sudokuFormArray.controls; let i = $index; track i;) {
+      <div>
+        <input class="cell" [ngClass]="{'border-thick': (i + 1) % 3 == 0,'bottom-border-thick':isThirdRow(i), 'border-thick-bottom': isSixthRow(i)}" [formControl]="control">
+      </div>
+      }
     </div>
-    <button class="button" type="submit" (click)="onClick()">Add Sudoku</button>
-    <button class="button" type="submit" (click)="onClick()">reset</button>  
-    <button class="button" type="submit" (click)="onAddControl()">add control</button>  
-  </form>
+    
+    <button class="button" type="button" (click)="reset()">Reset</button>
+    <button class="button" type="button" (click)="ready()">Ready</button>
+    <div *ngFor="let control of sudokuForms; let i = index;">
+      <div *ngIf="control.errors">     
+        <p class="error-box">  In cell: {{i+1}}  {{ getErrorMessage(i) }}  </p>
+      </div>
+    </div>
+  </div>
+  <div >
+    
+  </div>
 </div>
-
-
 
