@@ -4,14 +4,22 @@
     <h6 class="game-intro">To play game please enter a valid sudoku puzzle and press Ready!</h6>
     <div class="sudoku-board">
       @for (control of sudokuFormArray.controls; let i = $index; track i;) {
-      <div>
-        <input class="cell" [ngClass]="{'border-thick': (i + 1) % 3 == 0,'bottom-border-thick':isThirdRow(i), 'border-thick-bottom': isSixthRow(i)}" [formControl]="control">
-      </div>
+        <div>
+          <input 
+            class="cell"
+            [formControl]="control" 
+            [ngClass]="{
+              'border-thick': (i + 1) % 3 == 0,
+              'bottom-border-thick': dataRow[i].thirdRow, 
+              'border-thick-bottom': dataRow[i].sixthRow}" >
+        </div>
       }
     </div>
     
-    <button class="button" type="button" (click)="reset()">Reset</button>
-    <button class="button" type="button" (click)="ready()">Ready</button>
+    <button class="button-reset" type="button" (click)="reset()">Reset</button>
+    <button class="button-ready" type="button" (click)="ready()">Ready</button>  
+    <button class="button-check" type="button" (click)="checkSolution()">Check Solution</button>
+    
 
     <div >
       @for(control of sudokuFormArray.controls; let i = $index; track i){

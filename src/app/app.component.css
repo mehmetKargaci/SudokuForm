@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
     color: rgba(176, 93, 206, 0.985);
 
 }
@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
     color: rgb(25, 32, 32);
 
 }
@@ -57,11 +57,25 @@
 
 }
 
-.button{
-    width: 6rem;
+.button-reset{
+    width: 5rem;
     height: 3rem;
-    margin-top: 30px;
-    margin-left: 50px;
+    color: indianred;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.button-ready{
+    width: 5rem;
+    height: 3rem;
+    color: rgb(0, 162, 255);
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.button-check{
+    width: 5rem;
+    height: 3rem;
+    margin-top: 20px;
+    margin-left: 30px;
 }
 .error-box{
     margin-top: 30px;
