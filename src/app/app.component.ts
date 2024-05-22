@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl} from '@angular/forms';
 import { validNumber } from './valid-number.validator';
 import { SudokuValidator } from './sudoku-validator';
 
@@ -20,12 +20,14 @@ export class AppComponent implements OnInit {
   }));
 
   validator = new SudokuValidator();
+  elements = [];
+  isValid = false;
   
 
   ngOnInit(): void {
-    // this.sudokuFormArray.valueChanges.subscribe(value => {
-    //   console.log(value)
-    // })
+    this.sudokuFormArray.valueChanges.subscribe(value =>
+      this.elements = value     
+    );    
   }
 
   ready() {
@@ -53,26 +55,24 @@ export class AppComponent implements OnInit {
   }
 
   getGridValues() {
-    const values = this.sudokuFormArray.value.map(value => parseInt(value));
-    return Array.from(Array(9), (_, ind) => values.slice(ind * 9, ind * 9 + 9));
-    }
+    const val = this.elements.map((val => parseInt(val)));
+    const gridArray = Array.from(Array(9), (_, ind) => val.slice(ind * 9, ind * 9 + 9));        
+    return gridArray;   
+  }  
 
   validateSudoku() {
     const grid = this.getGridValues();
-    return this.validator.validateRows(grid) && this.validator.validateColumns(grid) && this.validator.validateSubgrids(grid);
-  }  
+    let result = this.validator.validateRows(grid) && this.validator.validateColumns(grid) && this.validator.validateSubgrids(grid);
+    this.isValid = !result;
+    return result; 
+  }
 
-  checkSolution() {
-    const grid = this.getGridValues();
-    const row = this.validator.validateRows(grid)
-    const column = this.validator.validateColumns(grid)
-    console.log(column);
-
-    // if (this.sudokuFormArray.valid && this.validateSudoku()) {
-    //   console.log('Valid Sudoku Solution:', this.sudokuFormArray.value);
-    // } else {
-    //   console.error('Invalid Sudoku Solution');
-    // }
+  popUpMessage(){
+    if (this.validateSudoku()) {
+      return 'Congruculations!!! Valid Sudoku Solution';
+    } else {
+    return'Invalid Sudoku Solution';
+    }
   }
 
   getErrorMessage(index: number) {
@@ -82,9 +82,10 @@ export class AppComponent implements OnInit {
     // }
     if (control.hasError('invalidNumber')) {      
       return 'Value must be between 1-9';
-  }
+    }
     return null;
-  }  
+  } 
+
 }
 
 

@@ -4,14 +4,14 @@ import { FormControl } from "@angular/forms";
 export class SudokuValidator {
 
   validateRows(grid: number[][]) { 
-    for (let row = 0; row < 9; row++) {
-      const rowNum = grid.map(colum => colum[row]);
-      if (!this.isUniqueArray(rowNum)) {
+    for (let i = 0;  i< 9; i++) {
+      const row = grid[i];
+      if (!this.isUniqueArray(row)) {
         return false;
       }
     }
-    return true;  
-  }
+    return true;
+  }  
 
   // Validate each column 
   validateColumns(grid: number[][]) {
@@ -42,11 +42,9 @@ export class SudokuValidator {
     return true;
   }
 
-  // check if an array contains unique numbers from 1 to 9
+  // check unique numbers 1-9
   isUniqueArray(arr: number[]) {
     const uniqueSet = new Set(arr.filter(num => num > 0 && num <= 9));
     return uniqueSet.size === arr.filter(num => num > 0 && num <= 9).length;
   }
-
-
 }
