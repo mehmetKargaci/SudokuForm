@@ -9,22 +9,25 @@
 .title{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
+    font-style: italic;
     margin-top: 5px;
-    color: rgba(176, 93, 206, 0.985);
+    color: rgba(164, 97, 164, 0.985);
 
 }
 .game-intro{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 15px;
     margin-top: 5px;
-    color: rgb(25, 32, 32);
+    color: gray;
 
 }
 
 .board-form-group{
-    border: 2px solid blue;  
+    padding: 30px;
+    border: 2px solid rgba(9, 49, 50, 0.974);  
 }
 
 .sudoku-board{
@@ -41,8 +44,11 @@
     border: 0.5px solid  rgb(44, 44, 44);
 }
 
-.border-thick{
+.border-thick-right{
     border-right: 3px solid  rgb(44, 44, 44);
+}
+.border-thick-left{
+    border-left: 3px solid  rgb(44, 44, 44);
 }
 
 .cell:disabled{
@@ -60,29 +66,24 @@
 .button-reset{
     width: 5rem;
     height: 3rem;
-    color: indianred;
-    margin-top: 20px;
-    margin-left: 30px;
+    border-color: rgb(239, 144, 180);   
+    color: rgb(255, 72, 0);
+    margin-top: 30px;
+    margin-left: 90px;
+    
 }
 .button-ready{
     width: 5rem;
     height: 3rem;
-    color: rgb(0, 162, 255);
+    border-color: aquamarine;    
+    color: rgba(17, 186, 102, 0.777);
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 15px;
 }
-.button-check{
-    width: 5rem;
-    height: 3rem;
-    margin-top: 20px;
-    margin-left: 30px;
-}
-.error-box{
-    margin-top: 30px;
-    margin-left: 50px;
-    color: rgb(221, 32, 32);
 
-}
 .false-antwort{
     color: red;
+}
+.invalid-entry{
+    color: blueviolet;
 }

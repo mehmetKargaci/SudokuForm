@@ -1,7 +1,7 @@
 <div class="container">  
   <div class="board-form-group">
     <H3 class="title">Welcome to Sudoku Puzzle</H3>
-    <h6 class="game-intro">To play game please enter a valid sudoku puzzle and press Ready!</h6>
+    <h6 class="game-intro">Enter a valid sudoku puzzle and press Ready to Start!</h6>
     <div class="sudoku-board">
       @for (control of sudokuFormArray.controls; let i = $index; track i;) {
         <div>
@@ -9,29 +9,20 @@
             class="cell"
             [formControl]="control" 
             [ngClass]="{
-              'border-thick': (i + 1) % 3 == 0,
-              'bottom-border-thick': dataRow[i].thirdRow, 
+              'border-thick-right': (i + 1) % 3 == 0,
+              'border-thick-left': i % 9 == 0,              
+              'bottom-border-thick': dataRow[i].thirdRow ,
               'border-thick-bottom': dataRow[i].sixthRow,
-              'false-antwort':!validateSudoku()}" >
+              'false-antwort': invalidCellIndexes.includes(i),
+              'invalid-entry': control.valid,
+             }" >
         </div>
       }
     </div>
     
     <button class="button-reset" type="button" (click)="reset()">Reset</button>
     <button class="button-ready" type="button" (click)="ready()">Ready</button>  
-    
-    
 
-    <div >
-      @for(control of sudokuFormArray.controls; let i = $index; track i){
-        <div *ngIf="control.errors">     
-          <p class="error-box">  In cell: {{i+1}}  {{ getErrorMessage(i) }}  </p>          
-        </div>
-      }      
-    </div>
-      <div *ngIf="!validateSudoku()">
-        <p class="error-box">  {{ popUpMessage() }}  </p>
-      </div>
   </div>
 </div>
 
