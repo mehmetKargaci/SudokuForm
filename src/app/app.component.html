@@ -13,16 +13,20 @@
               'border-thick-left': i % 9 == 0,              
               'bottom-border-thick': dataRow[i].thirdRow ,
               'border-thick-bottom': dataRow[i].sixthRow,
-              'false-antwort': invalidCellIndexes.includes(i),
-              'invalid-entry': control.valid,
+              'false-antwort': invalidCellIndexes.includes(i) || control.invalid              
              }" >
         </div>
       }
     </div>
     
     <button class="button-reset" type="button" (click)="reset()">Reset</button>
-    <button class="button-ready" type="button" (click)="ready()">Ready</button>  
+    <button class="button-ready" type="button" (click)="ready()">Ready</button> 
+
+    <div class="solution-succes" *ngIf="isValid">
+      <p>Congratulations!!!</p>
+    </div> 
 
   </div>
+
 </div>
 

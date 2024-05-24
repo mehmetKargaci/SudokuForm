@@ -38,7 +38,8 @@ export class AppComponent implements OnInit {
       this.invalidCellIndexes = this.validationService.validate(
         array.map((a) => Number(a))
       );
-      this.isValid = this.invalidCellIndexes.length === 0 ;
+      const allCellsFilled = array.every(cell => cell !== null && cell !== '');      
+      this.isValid = this.invalidCellIndexes.length === 0 && allCellsFilled ;
            
     });     
   }
@@ -60,9 +61,10 @@ export class AppComponent implements OnInit {
     // this.sudokuFormArray.reset()
     for (const control of this.sudokuFormArray.controls) {
         control.setValue('');
-        control.enable();
+        control.enable();        
     }
-  }  
+    this.isValid = false;
+  }    
 
   get controls() {
     return this.sudokuFormArray.controls;

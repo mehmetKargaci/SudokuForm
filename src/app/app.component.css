@@ -15,6 +15,19 @@
     color: rgba(164, 97, 164, 0.985);
 
 }
+
+.solution-succes{
+  
+    font-style: italic;   
+    color: rgba(164, 97, 164, 0.985);
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid green;
+    background-color: #eaffea;   
+    text-align: center;
+    font-weight: bold;
+
+}
 .game-intro{
     display: flex;
     justify-content: center;
