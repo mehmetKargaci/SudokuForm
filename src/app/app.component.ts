@@ -29,19 +29,29 @@ export class AppComponent implements OnInit {
     })
   );
 
+  startValues: string[] = []; 
   invalidCellIndexes : number[] = [];
   isValid = false;
-  
+    
 
   ngOnInit(): void {
-    this.sudokuFormArray.valueChanges.subscribe((array)=>{
-      this.invalidCellIndexes = this.validationService.validate(
-        array.map((a) => Number(a))
+    this.sudokuFormArray.valueChanges.subscribe((array) => {
+      const values : number[] = this.sudokuFormArray.controls.map(
+        (control)=> +control.value
+      
+    
       );
-      const allCellsFilled = array.every(cell => cell !== null && cell !== '');      
-      this.isValid = this.invalidCellIndexes.length === 0 && allCellsFilled ;
-           
-    });     
+      this.invalidCellIndexes = this.validationService.validate(values);
+      // this.isValid = this.invalidCellIndexes.length === 0 && !!values.find((v)=> v === 0);
+      this.isValid = this.invalidCellIndexes.length === 0 && !values.includes(0);           
+    });  
+    this.startValues = ['','','2','','5','','8','7','4','','','3','','','','','',
+    '','','','','2','','8','','5','','3','9','','','','7','','','','6','','','','','','','','5',
+    '','','','4','','','','9','8','','6','','9','','4','','','','','','','','','','5','','',
+    '7','4','9','5','3','','6','',''];
+
+    this.sudokuFormArray.setValue(this.startValues);
+    this.sudokuFormArray.at(5).patchValue('6');   //as an eaxample usage of patchValue
   }
 
   ready() {
@@ -49,8 +59,9 @@ export class AppComponent implements OnInit {
       const value = control.value;
       if (value !== null) {         
         const parsedValue = parseInt(value); 
-        if (!isNaN(parsedValue) && (parsedValue >= 1 && parsedValue <= 9)) { 
-          control.disable();          
+        if (!isNaN(parsedValue) && (parsedValue >= 1 && parsedValue <= 9 )) { 
+          control.disable(); 
+             
         }
       }      
       
@@ -60,11 +71,13 @@ export class AppComponent implements OnInit {
   reset() {
     // this.sudokuFormArray.reset()
     for (const control of this.sudokuFormArray.controls) {
-        control.setValue('');
+        control.setValue('');            
         control.enable();        
     }
+    this.sudokuFormArray.setValue(this.startValues);
+    this.sudokuFormArray.at(5).patchValue('6'); 
     this.isValid = false;
-  }    
+  }      
 
   get controls() {
     return this.sudokuFormArray.controls;

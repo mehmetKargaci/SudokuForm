@@ -67,13 +67,12 @@
 .cell:disabled{
     background-color: rgb(224, 224, 224);
 }
+
 .border-thick-bottom{
     border-bottom: 3px solid  rgb(44, 44, 44);
-
 }
 .bottom-border-thick{
     border-bottom: 3px solid  rgb(44, 44, 44);
-
 }
 
 .button-reset{
@@ -98,5 +97,5 @@
     color: red;
 }
 .invalid-entry{
-    color: blueviolet;
+    color: rgb(243, 26, 142);
 }
