@@ -4,19 +4,17 @@ import { Injectable } from "@angular/core";
 export class ValidationService {
 
   validate(sudokuData: number[]) {
-    // const invalidCellIndexes: number[] = [];
+  
     const invalidCellIndexes = new Set<number>(); // using Set is optimal for speed
     const sudokuGrid: number[][] = [];
-    // console.log(sudokuData);
+
     this.createRowGrids(sudokuGrid);
     this.createColGrids(sudokuGrid);
-    this.createSubGrids(sudokuGrid);
-    // console.log(sudokuGrid);
+    this.createSubGrids(sudokuGrid);  
 
     for (const grid of sudokuGrid) {
       this.detectErrors(grid, sudokuData, invalidCellIndexes);
     }
-    // console.log(invalidCellIndexes);
     return [...invalidCellIndexes];
   }
 

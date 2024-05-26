@@ -33,17 +33,17 @@
           <label>Select Your Level</label>
         </div>
         <label>
-          <input type="radio" name="difficulty" (change)="setEasyLevel()" checked> Easy
+          <input type="radio" name="difficulty" (change)="setLevel('easy')" checked> Easy
         </label>
       </div>
       <div>
         <label>
-          <input type="radio" name="difficulty" (change)="setMediumLevel()"> Medium
+          <input type="radio" name="difficulty" (change)="setLevel('medium')"> Medium
         </label>
       </div>
       <div>
         <label>
-          <input type="radio" name="difficulty" (change)="setHardLevel()"> Hard
+          <input type="radio" name="difficulty" (change)="setLevel('hard')"> Hard
         </label>
       </div>
     </div>    
