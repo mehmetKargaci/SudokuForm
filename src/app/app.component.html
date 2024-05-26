@@ -26,5 +26,27 @@
       <p>Congratulations!!!</p>
     </div> 
   </div>
+  <div>
+    <div class="difficulty-selection">
+      <div>
+        <div>
+          <label>Select Your Level</label>
+        </div>
+        <label>
+          <input type="radio" name="difficulty" (change)="setEasyLevel()" checked> Easy
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" name="difficulty" (change)="setMediumLevel()"> Medium
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" name="difficulty" (change)="setHardLevel()"> Hard
+        </label>
+      </div>
+    </div>    
+  </div>
 </div>
 

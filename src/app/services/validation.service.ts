@@ -16,7 +16,7 @@ export class ValidationService {
     for (const grid of sudokuGrid) {
       this.detectErrors(grid, sudokuData, invalidCellIndexes);
     }
-    console.log(invalidCellIndexes);
+    // console.log(invalidCellIndexes);
     return [...invalidCellIndexes];
   }
 

@@ -16,8 +16,19 @@
 
 }
 
-.solution-succes{
+.difficulty-selection{
+    height: 20vh;    
+    align-items: center;
+    margin-top: 50px;
+    padding: 15px;  
+    margin-left: 30px;
+    font-weight: lighter;   
+    border: 2px solid;
+    background-color: #f1f7f7;
   
+}
+
+.solution-succes{  
     font-style: italic;   
     color: rgba(164, 97, 164, 0.985);
     margin-top: 20px;
