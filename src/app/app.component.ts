@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   invalidCellIndexes : number[] = [];
   isValid = false;
+  difficultyLevel = this.sudokuLibraryService.library;
     
 
   ngOnInit(): void {
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
       this.isValid = this.invalidCellIndexes.length === 0 && !values.includes(0);           
     });
 
-    this.sudokuFormArray.setValue(this.sudokuLibraryService.library.easy);
+    this.sudokuFormArray.setValue(this.difficultyLevel.easy);
     this.ready();
     // this.sudokuFormArray.at(5).patchValue('6');   as an eaxample usage of patchValue
   }
@@ -65,7 +66,8 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
-    this.sudokuFormArray.reset();          
+    // this.sudokuFormArray.reset();
+    this.sudokuFormArray.setValue(this.difficultyLevel.reset);          
     this.sudokuFormArray.enable(); 
 
   }      
@@ -74,9 +76,8 @@ export class AppComponent implements OnInit {
     return this.sudokuFormArray.controls;
   } 
   setLevel(level: string){
-    this.reset();
-    const library = this.sudokuLibraryService.library
-    this.sudokuFormArray.setValue(library[level]);
+    this.reset();    
+    this.sudokuFormArray.setValue(this.difficultyLevel[level]);
     this.ready();
   } 
 }
