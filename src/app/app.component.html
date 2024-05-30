@@ -21,10 +21,14 @@
     </div>    
     <button class="button-reset" type="button" (click)="reset()">Reset</button>
     <button class="button-ready" type="button" (click)="ready()">Ready</button> 
+    <button class="button-solve" type="button" (click)="solve()">Solve</button> 
     
     <div class="solution-succes" *ngIf="isValid">
       <p>Congratulations!!!</p>
     </div> 
+    <div class="auto-solution" *ngIf="isAutoSolved">
+      <p> Solution Found in {{solutionTime }} milliseconds</p>
+    </div>
   </div>
   <div>
     <div class="difficulty-selection">

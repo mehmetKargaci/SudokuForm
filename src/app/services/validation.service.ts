@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
-export class ValidationService {
+export class ValidationService { 
 
   validate(sudokuData: number[]) {
   
@@ -15,7 +15,7 @@ export class ValidationService {
     for (const grid of sudokuGrid) {
       this.detectErrors(grid, sudokuData, invalidCellIndexes);
     }
-    return [...invalidCellIndexes];
+    return [...invalidCellIndexes];    
   }
 
   detectErrors(

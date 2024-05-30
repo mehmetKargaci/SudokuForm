@@ -2,7 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, Validators} from '@angular/forms';
 import { validNumber } from './utility/valid-number.validator';
 import { ValidationService } from './services/validation.service';
-import { SudokuLibraryService } from './services/sudoku.library';
+import { SudokuLibraryService } from './services/sudoku.library.service';
+import { SudokuSolverService } from './services/sudoku.solver.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,10 @@ import { SudokuLibraryService } from './services/sudoku.library';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+
   private validationService = inject (ValidationService); 
   private sudokuLibraryService = inject (SudokuLibraryService);
+  private sudokuSolverService = inject (SudokuSolverService);
   
 
   dataRow = Array.from(
@@ -34,21 +37,25 @@ export class AppComponent implements OnInit {
   invalidCellIndexes : number[] = [];
   isValid = false;
   difficultyLevel = this.sudokuLibraryService.library;
+  controlValues = [];
+  isAutoSolved = false; 
+  solutionTime:number;  
     
 
   ngOnInit(): void {
     this.sudokuFormArray.valueChanges.subscribe((array) => {
       const values : number[] = this.sudokuFormArray.controls.map(
         (control)=> +control.value   
-      );
-      this.invalidCellIndexes = this.validationService.validate(values);
+      );  
+      this.controlValues = values;
+      this.invalidCellIndexes = this.validationService.validate(values);      
       // this.isValid = this.invalidCellIndexes.length === 0 && !!values.find((v)=> v === 0);
       this.isValid = this.invalidCellIndexes.length === 0 && !values.includes(0);           
     });
-
-    this.sudokuFormArray.setValue(this.difficultyLevel.easy);
+ 
+    this.setLevel('easy');
     this.ready();
-    // this.sudokuFormArray.at(5).patchValue('6');   as an eaxample usage of patchValue
+
   }
 
   ready() {
@@ -57,7 +64,8 @@ export class AppComponent implements OnInit {
       if (value !== null) {         
         const parsedValue = parseInt(value); 
         if (!isNaN(parsedValue) && (parsedValue >= 1 && parsedValue <= 9 )) { 
-          control.disable(); 
+          control.disable();
+          this.isAutoSolved = false; 
              
         }
       }      
@@ -69,8 +77,24 @@ export class AppComponent implements OnInit {
     // this.sudokuFormArray.reset();
     this.sudokuFormArray.setValue(this.difficultyLevel.reset);          
     this.sudokuFormArray.enable(); 
+    this.isAutoSolved = false; 
 
-  }      
+  } 
+  solve() {
+    const puzzle = this.controlValues;
+    // const puzzle = this.sudokuFormArray.value;
+    const solution = this.sudokuSolverService.solveSudoku(puzzle.map(Number));
+    const validSolution = this.invalidCellIndexes.length === 0 && puzzle.map(Number).includes(0);
+    if (validSolution) {
+      this.isValid = true;
+      this.sudokuFormArray.patchValue(solution.map(String));
+      this.isAutoSolved = true; 
+      this.solutionTime = this.sudokuSolverService.takenTime;     
+    } else {
+      this.isValid = false;
+      alert('No solution found');
+    }
+    }     
 
   get controls() {
     return this.sudokuFormArray.controls;

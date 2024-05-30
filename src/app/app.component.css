@@ -92,7 +92,7 @@
     border-color: rgb(239, 144, 180);   
     color: rgb(255, 72, 0);
     margin-top: 30px;
-    margin-left: 90px;
+    margin-left: 40px;
     
 }
 .button-ready{
@@ -103,10 +103,24 @@
     margin-top: 20px;
     margin-left: 15px;
 }
+.button-solve{
+    width: 5rem;
+    height: 3rem;
+    border-color: rgb(127, 236, 255);    
+    color: rgba(17, 110, 186, 0.777);
+    margin-top: 20px;
+    margin-left: 15px;
+}
 
 .false-antwort{
     color: red;
 }
 .invalid-entry{
     color: rgb(243, 26, 142);
+}
+.auto-solution{  
+    font-style: italic;   
+    margin-top: 10px;     
+    text-align: center;
+    font-weight: bold;
 }
